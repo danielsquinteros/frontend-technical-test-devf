@@ -4,7 +4,7 @@ const getToken = () => localStorage.getItem('token')
 
 const getCases = async () => {
     try {
-        const { data } = await axios.get(' http://localhost:3000/api/v1/cases', {
+        const { data } = await axios.get('cases', {
             headers: {
                'x-token': getToken() //the token is a variable which holds the token
               }
@@ -17,7 +17,7 @@ const getCases = async () => {
 }
 const getCasesUserId = async (id) => {
     try {
-        const { data } = await axios.get(`http://localhost:3000/api/v1/cases/user/${id}`, {
+        const { data } = await axios.get(`cases/user/${id}`, {
             headers: {
                 'x-token': getToken()//the token is a variable which holds the token
               }
@@ -32,7 +32,7 @@ const getCasesUserId = async (id) => {
 const updateCase = async (id, data) => {
     const {title, description, user, state, type} = data
     try {
-        const response = await axios.put(`http://localhost:3000/api/v1/case/${id}`, {title, description, user, state, type} , {
+        const response = await axios.put(`case/${id}`, {title, description, user, state, type} , {
             headers: {
                 Authorization: `Bearer ${getToken()}`,
                 'x-token': getToken()//the token is a variable which holds the token
@@ -48,7 +48,7 @@ const createCase = async (data) => {
     const { title, description, type, user, state, student,date_started } = data
 
     try {
-        const response = await axios.post(`http://localhost:3000/api/v1/case/create`, {title, description, type, user, state, student,date_started} , {
+        const response = await axios.post(`case/create`, {title, description, type, user, state, student,date_started} , {
             headers: {
                 Authorization: `Bearer ${getToken()}`,
                 'x-token': getToken()//the token is a variable which holds the token
@@ -63,7 +63,7 @@ const createCase = async (data) => {
 
 const deteleCase = async (id) => {
     try {
-        const response = await axios.delete(`http://localhost:3000/api/v1/case/${id}`, {
+        const response = await axios.delete(`case/${id}`, {
             headers: {
                 Authorization: `Bearer ${getToken()}`,
                 'x-token': getToken()//the token is a variable which holds the token

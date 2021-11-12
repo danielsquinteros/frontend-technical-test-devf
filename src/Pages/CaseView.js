@@ -1,8 +1,7 @@
 import { Typography, Box, Button } from '@mui/material';
-import React, {useEffect, useState, useContext} from 'react'
+import React, {useEffect, useState} from 'react'
 import * as Yup from 'yup';
 
-import { AuthContext } from '../Context/AuthContext';
 
 import NavbarView from './NavbarView';
 
@@ -20,7 +19,6 @@ import  { getUsers } from '../Services/userService';
 import  dataUser from '../Services/dataUser';
 
 const CaseView = () => {
-    const { userInfo } = useContext(AuthContext)
     const [openModal, setOpenModal] = useState(false);
     const [msgApi, setMsgApi] = useState({msg:'', status: false, type: 'error', title: 'Éxito'})
     const [dataAll, setDataAll] = useState([])

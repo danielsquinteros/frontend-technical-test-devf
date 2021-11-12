@@ -5,7 +5,7 @@ const login = async(email, password) => {
         email, password
     }
     try {
-        const response = await axios.post(' http://localhost:3000/api/v1/login', data)
+        const response = await axios.post('login', data)
         return response
     } catch (error) {
         throw error.response.data

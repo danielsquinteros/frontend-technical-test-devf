@@ -4,7 +4,7 @@ const getToken = () => localStorage.getItem('token')
 
 const getUsers = async () => {
     try {
-        const { data } = await axios.get(' http://localhost:3000/api/v1/users', {
+        const { data } = await axios.get('users', {
             headers: {
                'x-token': getToken() //the token is a variable which holds the token
               }
@@ -18,7 +18,7 @@ const getUsers = async () => {
 
 const getUserId = async (id) => {
     try {
-        const { data } = await axios.get(`http://localhost:3000/api/v1/user/${id}`, {
+        const { data } = await axios.get(`user/${id}`, {
             headers: {
                 Authorization: `Bearer ${getToken()}`,
                 'x-token': getToken()//the token is a variable which holds the token
@@ -34,7 +34,7 @@ const getUserId = async (id) => {
 const updateUser = async (id, data) => {
     const {name, password, email, role} = data
     try {
-        const response = await axios.put(`http://localhost:3000/api/v1/user/${id}`, {name, password, email, role} , {
+        const response = await axios.put(`user/${id}`, {name, password, email, role} , {
             headers: {
                 Authorization: `Bearer ${getToken()}`,
                 'x-token': getToken()//the token is a variable which holds the token
@@ -49,7 +49,7 @@ const updateUser = async (id, data) => {
 const createUser = async (data) => {
     const {name, password, email, role} = data
     try {
-        const response = await axios.post(`http://localhost:3000/api/v1/user/create`, {name, password, email, role} , {
+        const response = await axios.post(`user/create`, {name, password, email, role} , {
             headers: {
                 Authorization: `Bearer ${getToken()}`,
                 'x-token': getToken()//the token is a variable which holds the token

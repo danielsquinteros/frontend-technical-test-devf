@@ -93,6 +93,7 @@ const Login = () =>  {
                     sx={{ mt: 1, mb: 1 }}
                     />
                 <TextField 
+                    type="password"
                     name="password"
                     label="Password"
                     sx={{ mt: 1, mb: 1 }}

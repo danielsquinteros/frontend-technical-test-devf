@@ -4,7 +4,7 @@ const getToken = () => localStorage.getItem('token')
 
 const getTypes = async () => {
     try {
-        const { data } = await axios.get(' http://localhost:3000/api/v1/types', {
+        const { data } = await axios.get('types', {
             headers: {
                'x-token': getToken() //the token is a variable which holds the token
               }
@@ -18,7 +18,7 @@ const getTypes = async () => {
 const updateType = async (id, data) => {
     const {title, description} = data
     try {
-        const response = await axios.put(`http://localhost:3000/api/v1/type/${id}`, {title, description} , {
+        const response = await axios.put(`type/${id}`, {title, description} , {
             headers: {
                 Authorization: `Bearer ${getToken()}`,
                 'x-token': getToken()//the token is a variable which holds the token
@@ -35,7 +35,7 @@ const createType = async (title, description) => {
         title, description
     }
     try {
-        const response = await axios.post(`http://localhost:3000/api/v1/type/create`, data , {
+        const response = await axios.post(`type/create`, data , {
             headers: {
                 Authorization: `Bearer ${getToken()}`,
                 'x-token': getToken()//the token is a variable which holds the token
