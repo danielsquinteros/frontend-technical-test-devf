@@ -16,7 +16,7 @@ function AllRoutes() {
 
     return (
         <Routes>
-            <Route path="/" element={<Navigate to="/cases" />}>
+            <Route path="/" element={<Navigate to="/login" />}>
             </Route>
 
             <Route path="/login" element={<LoginView />}>
