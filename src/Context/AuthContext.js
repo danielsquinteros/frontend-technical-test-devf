@@ -7,10 +7,9 @@ export const AuthContext = createContext()
 
 export const AuthProvider = (props) => {
     let navigate = useNavigate();
-    const [userId, setUserId] = useState({id: '', role: ''})
+    const [userInfo, setUserInfo] = useState({id: '', role: ''})
     const [isAuth, setIsAuth] = useState(false)
     const [token, setToken] = useState(localStorage.getItem('token'))
-
 
     useEffect(() => {
         const verifyTokenAuth = async () => {
@@ -20,7 +19,7 @@ export const AuthProvider = (props) => {
                         token,
                         process.env.REACT_APP_SECRET_PRIVATE_KEY
                     )
-                    setUserId({id: `${decoded.id}`})
+                    setUserInfo({id: `${decoded.id}`, role:`${decoded.role}`})
                     setIsAuth(true)
                 }
             } catch (error) {
@@ -40,6 +39,7 @@ export const AuthProvider = (props) => {
     const clearToken = () => {
         localStorage.clear();
         setIsAuth(false)
+        setUserInfo({id: '', role:''})
         setToken(null)
         navigate("/login");
     }
@@ -49,8 +49,8 @@ export const AuthProvider = (props) => {
         setToken,
         saveToken,
         clearToken,
-        userId,
-        setUserId,
+        userInfo,
+        setUserInfo,
         isAuth,
         setIsAuth,
     }

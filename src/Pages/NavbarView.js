@@ -1,22 +1,18 @@
 import React, {useContext} from 'react';
+import { Link } from 'react-router-dom';
+
 import AppBar from '@mui/material/AppBar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import Link from '@mui/material/Link';
 import GlobalStyles from '@mui/material/GlobalStyles';
 import Container from '@mui/material/Container';
 
 import { AuthContext } from '../Context/AuthContext';
-import { getUserId } from '../Services/userService';
-
 
 function NavbarView({children}) {
-  const {clearToken, userId} = useContext(AuthContext)
-
-
-
+  const {clearToken, userInfo} = useContext(AuthContext)
 
   return (
         <>
@@ -30,41 +26,37 @@ function NavbarView({children}) {
       >
         <Toolbar sx={{ flexWrap: 'wrap' }}>
           <Typography variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
-            DEV.F Cases - Hola { userId.id }
+            DEV.F Cases - Hola { userInfo.id}
           </Typography>
           <nav>
-            <Link
-              variant="button"
-              color="text.primary"
-              href="/users"
-              sx={{ my: 1, mx: 1.5 }}
-            >
-              Usuarios
-            </Link>
-            <Link
-              variant="button"
-              color="text.primary"
-              href="/cases"
-              sx={{ my: 1, mx: 1.5 }}
-            >
-              Casos
-            </Link>
-            <Link
-              variant="button"
-              color="text.primary"
-              href="/types"
-              sx={{ my: 1, mx: 1.5 }}
-            >
-              Tipos de Casos
-            </Link>
-            <Link
-              variant="button"
-              color="text.primary"
-              href="/status"
-              sx={{ my: 1, mx: 1.5 }}
-            >
-              Estados de Casos
-            </Link>
+            <Link to="/cases" style={{ textDecoration: 'none', marginRight: '5px'}}>
+              <Button variant="text"  color="primary">
+                Casos
+                </Button>
+            </Link> 
+            
+            { userInfo.role === 'ADMIN_ROLE' && 
+              <Link to="/users" style={{ textDecoration: 'none', marginRight: '5px'}}> 
+                  <Button variant="text" color="primary">
+                    Usuarios
+                  </Button>
+              </Link> 
+            }
+
+            { userInfo.role === 'ADMIN_ROLE' && 
+              <Link to="/types" style={{ textDecoration: 'none', marginRight: '5px'}}> 
+                <Button variant="text"  color="primary">
+                  Tipos de Casos
+                </Button>
+              </Link> 
+            }
+            { userInfo.role === 'ADMIN_ROLE' && 
+              <Link to="/status" style={{ textDecoration: 'none', marginRight: '5px'}}>
+                <Button variant="text" >
+                  Estados de Casos
+                </Button>
+              </Link> 
+            }
           </nav>
           <Button variant="outlined" sx={{ my: 1, mx: 1.5 }} onClick={clearToken}>
             Cerrar Sesión

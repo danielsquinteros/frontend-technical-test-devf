@@ -2,11 +2,14 @@ import { Typography, Box, Button } from '@mui/material';
 import React, {useEffect, useState} from 'react'
 import * as Yup from 'yup';
 
-import Card from '../Components/Molecules/Card'
 import NavbarView from './NavbarView';
+
+import Card from '../Components/Molecules/Card'
 import Modal from '../Components/Molecules/Modal';
 import Message from '../Components/Molecules/Message';
+
 import ActionFormik from '../Components/Organisms/ActionFormik';
+
 import  { getStatus, updateStatus, createState } from '../Services/statusService';
 
 

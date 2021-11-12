@@ -30,6 +30,7 @@ const getUserId = async (id) => {
         throw error.response.data
     }
 }
+
 const updateUser = async (id, data) => {
     const {name, password, email, role} = data
     try {

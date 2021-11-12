@@ -2,14 +2,16 @@ import React, {useState, useContext} from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import { Formik, Form } from 'formik';
+
 import {Avatar, Button, Alert, AlertTitle, Collapse} from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { Container, Box, Typography } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import TextField from '../Components/Atoms/TextField';
-import loginService from '../Services/loginServices'
 import logo from '../assets/images/logo_devf.png'
+
+import loginService from '../Services/loginServices'
 import { AuthContext } from '../Context/AuthContext';
 
 const theme = createTheme({
@@ -26,14 +28,15 @@ const FORM_VALIDATION = Yup.object().shape({
 })
 
 const Login = () =>  {
-    const { saveToken } = useContext(AuthContext)
+    const { saveToken, isAuth } = useContext(AuthContext)
     const [errorApi, setErrorApi] = useState({msg:'', status: false})
     const [successApi, setSuccessApi] = useState({msg:'', status: false})
     
     let navigate = useNavigate();
 
-
-
+    if(isAuth){
+      navigate('/cases')
+    }
 
     const submitLogin = async (values) => {
         try {

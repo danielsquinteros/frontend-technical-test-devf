@@ -34,7 +34,6 @@ const index = (
         return TextFields
     }
     const AllSelects = () => {
-        console.log( INITIAL_FORM_STATE_ARRAY_SELECT)
         const Selects =   INITIAL_FORM_STATE_ARRAY_SELECT.map(element => {
            return  (<Select 
                     content={element.content}

@@ -13,10 +13,9 @@ import DataCase from '../Components/Molecules/DataCase';
 
 import ActionFormik from '../Components/Organisms/ActionFormik';
 
-import  { getCases, updateCase, createCase } from '../Services/casesService';
+import  { updateCase, createCase, getCasesUserId } from '../Services/casesService';
 import  { getStatus } from '../Services/statusService';
 import  { getTypes } from '../Services/typesService';
-import  { getUsers } from '../Services/userService';
 import  dataUser from '../Services/dataUser';
 
 const CaseView = () => {
@@ -24,7 +23,6 @@ const CaseView = () => {
     const [openModal, setOpenModal] = useState(false);
     const [msgApi, setMsgApi] = useState({msg:'', status: false, type: 'error', title: 'Éxito'})
     const [dataAll, setDataAll] = useState([])
-    const [userAll, setUserAll] = useState([])
     const [typesAll, setTypesAll] = useState([])
     const [statusAll, setStatusAll] = useState([])
 
@@ -63,23 +61,21 @@ const CaseView = () => {
     useEffect(() => {
         const getData = async () => {
             try {
-                const dataCases = await getCases();
+                const dataCases = await getCasesUserId(userInfo.id);
                 setDataAll(dataCases)
             } catch (error) {
                 console.log(error);
-            } 
+            }
         };
         getData();
 
-    },[dataAll]);
+    },[dataAll, userInfo]);
 
     useEffect(() => {
         const getAll = async () => {
             try {
-                const dataUser = await getUsers();
                 const dataStatus = await getStatus();
                 const dataTypes = await getTypes();
-                setUserAll(dataUser)
                 setStatusAll(dataStatus)
                 setTypesAll(dataTypes)
 
@@ -123,12 +119,6 @@ const CaseView = () => {
             }
             INITIAL_FORM_STATE_ARRAY_SELECT={
                 [
-                    {
-                        name: 'user',
-                        content: element.user._id,
-                        label: 'Miembro del Equipo',
-                        options:userAll
-                    },
                     {
                         name: 'state',
                         content: element.state._id,
@@ -196,7 +186,7 @@ const CaseView = () => {
                     INITIAL_FORM_STATE={{
                         title: '', 
                         description: '',
-                        user: '',
+                        user: userInfo.id,
                         state: '',
                         type: '',
                         student: '',
@@ -217,11 +207,6 @@ const CaseView = () => {
                     }
                     INITIAL_FORM_STATE_ARRAY_SELECT={
                         [
-                            {
-                                name: 'user',
-                                label: 'Miembro del Equipo',
-                                options:userAll
-                            },
                             {
                                 name: 'state',
                                 label: 'Estado del Caso',
@@ -250,7 +235,6 @@ const CaseView = () => {
                     FORM_VALIDATION={{ 
                         title: Yup.string().required('Required'), 
                         description: Yup.string().required('Required'),
-                        user: Yup.string().required('Required'), 
                         type: Yup.string().required('Required'), 
                         state: Yup.string().required('Required'),
                         student: Yup.string().required('Required'), 
