@@ -14,6 +14,7 @@ import {
     DialogContent,
     Button
 } from '@mui/material';
+import  { format, formatDistance } from 'date-fns';
 
 import DeleteIcon from '@mui/icons-material/Delete';
 import Message from '../Message'
@@ -26,6 +27,9 @@ import  { deteleCase } from '../../../Services/casesService';
 export default function BasicCard({id, type, statusName, title,description, nameStudent, careerStudent, nameMemberTeam, created, started}){
     const [msgApi, setMsgApi] = useState({msg:'', status: false, type: 'error', title: 'Éxito'})
     const [openDelete, setOpenDelete] = useState(false);
+    const dateNow = new Date();
+    const createdCase = new Date(created);
+    const startedCase = new Date(started);
 
     const actionDeleteCase = async () => {
         try {
@@ -109,7 +113,7 @@ export default function BasicCard({id, type, statusName, title,description, name
                         Creado el:
                         </Typography>
                         <Typography variant="body1"  component="div">
-                            {created}
+                        {format(createdCase, "dd/MM/yyyy")}
                         </Typography>
                     </Box>
                     <Box sx={{ml:4}}>
@@ -117,15 +121,15 @@ export default function BasicCard({id, type, statusName, title,description, name
                         Empieza el:
                         </Typography>
                         <Typography variant="body1"  component="div">
-                            {started}
+                            {format(startedCase, "dd/MM/yyyy")}
                         </Typography>
                     </Box>
                     <Box sx={{ml:4}}>
                         <Typography variant="body2"  color="text.secondary" component="div">
-                        Transcurrido
+                        Tiempo para empezar: 
                         </Typography>
                         <Typography variant="body1"  component="div">
-                            {started}
+                            {formatDistance(startedCase,dateNow)}
                         </Typography>
                     </Box>
                 </Box>

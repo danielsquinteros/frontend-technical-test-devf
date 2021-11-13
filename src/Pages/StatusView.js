@@ -1,6 +1,11 @@
-import { Typography, Box, Button } from '@mui/material';
 import React, {useEffect, useState} from 'react'
 import * as Yup from 'yup';
+import { 
+    Typography, 
+    Box, 
+    Button, 
+    Stack, 
+    Chip,  } from '@mui/material';
 
 import NavbarView from './NavbarView';
 
@@ -91,6 +96,12 @@ const StatusView = () => {
                  <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
                 {element._id}
                 </Typography>
+                <Stack direction="row" spacing={1} sx={{mt:1, mb:1}}>
+                    { element.title === 'Sin empezar' ? <Chip label={'Color Red'} color="error" variant="outlined"/> : '' }
+                    { element.title === 'En proceso' ? <Chip label={'Color Yellow'} color="warning" variant="outlined"/> : '' }
+                    { element.title === 'Terminado' ? <Chip label={'Color Green'} color="success" variant="outlined"/> : '' }
+                    { element.title === 'Sin respuesta' ? <Chip label={'Color Red'} color="error" variant="outlined"/> : '' }
+                </Stack>
                 <Typography variant="h5" component="div">
                 {element.title}
                 </Typography>
