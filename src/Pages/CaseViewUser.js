@@ -25,6 +25,7 @@ const CaseView = () => {
     const [dataAll, setDataAll] = useState([])
     const [typesAll, setTypesAll] = useState([])
     const [statusAll, setStatusAll] = useState([])
+    const dateNow = new Date();
 
     const submitCreate = async (values) => {
         try {
@@ -238,7 +239,7 @@ const CaseView = () => {
                         type: Yup.string().required('Required'), 
                         state: Yup.string().required('Required'),
                         student: Yup.string().required('Required'), 
-                        date_started: Yup.date().required('Required'),
+                        date_started: Yup.date().min(dateNow, "Ingresa una fecha superior al día de hoy").required('Required'),
                     }}
                     >
                         <Button onClick={handleClose}>Cerrar</Button>

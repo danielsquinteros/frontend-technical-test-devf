@@ -19,7 +19,6 @@ const DataTimePicker = ({name, ...othersProps}) => {
         configDataTimePicker.error = true;
         configDataTimePicker.helperText = meta.error;
       }
-
     return (
         <TextField 
         {...configDataTimePicker}
