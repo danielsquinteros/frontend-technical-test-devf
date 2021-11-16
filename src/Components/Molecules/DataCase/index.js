@@ -129,7 +129,7 @@ export default function BasicCard({id, type, statusName, title,description, name
                         Tiempo para empezar: 
                         </Typography>
                         <Typography variant="body1"  component="div">
-                            {formatDistance(startedCase,dateNow)}
+                            {formatDistance(startedCase,dateNow, {addSuffix: true})}
                         </Typography>
                     </Box>
                 </Box>
